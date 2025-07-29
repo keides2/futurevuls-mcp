@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "futurevuls": {
+      "command": "node",
+      "args": ["C:\\Users\\[USERNAME]\\path\\to\\futurevuls-mcp\\futurevuls-mcp.js"],
+      "env": {
+        "FUTUREVULS_API_TOKEN": "your_actual_api_token_here"
+      }
+    }
+  }
+}
