@@ -1,6 +1,8 @@
-# FutureVuls MCP Server (Windows版 - Node.js)
+# FutureVuls MCP Server (Windows Edition - Node.js)
 
 ![FutureVuls MCP](./img/top.png)
+
+**English** | [日本語](README_ja.md)
 
 <div align="center">
 
@@ -10,107 +12,107 @@
 
 ---
 
-## 概要
+## Overview
 
-このプロジェクトは、<img src=./img/future_vuls.png width="10%">FutureVuls APIを<img src=./img/modelcontextprotocol.png width="10%">Model Context Protocol (MCP)経由でアクセスできるようにするWindows向けサーバーです。Claude等のAIアシスタントから脆弱性管理機能を直接利用できます。
+This project is a Windows-based server that provides access to the <img src=./img/future_vuls.png width="10%">FutureVuls API through the <img src=./img/modelcontextprotocol.png width="10%">Model Context Protocol (MCP). It enables AI assistants like Claude to directly utilize vulnerability management functions.
 
-### 🎯 主な機能
+### 🎯 Key Features
 
-- **🔍 脆弱性管理**: CVE情報の検索・詳細表示
-- **📋 タスク管理**: 脆弱性対応タスクの確認・管理  
-- **🖥️ サーバー管理**: 監視対象サーバーの一覧・詳細表示
-- **📊 レポート生成**: 週次レポートの自動生成
-- **💓 ヘルスチェック**: FutureVuls APIの接続確認
+- **🔍 Vulnerability Management**: Search and display detailed CVE information
+- **📋 Task Management**: Check and manage vulnerability response tasks
+- **🖥️ Server Management**: List and display details of monitored servers
+- **📊 Report Generation**: Automated weekly report generation
+- **💓 Health Check**: FutureVuls API connection verification
 
-## システム要件
+## System Requirements
 
 - **OS**: Windows 10/11 (64bit)
-- **Node.js**: 18.0以上 (LTS推奨)
-- **npm**: Node.jsに同梱
-- **Claude Desktop**: 最新版
-- **メモリ**: 4GB以上推奨
-- **ストレージ**: 1GB以上の空き容量
+- **Node.js**: 18.0 or higher (LTS recommended)
+- **npm**: Included with Node.js
+- **Claude Desktop**: Latest version
+- **Memory**: 4GB or more recommended
+- **Storage**: 1GB or more free space
 
-## セットアップ
+## Setup
 
-### 📦 1. リポジトリのクローン
+### 📦 1. Clone the Repository
 
 ```cmd
 git clone https://github.com/keides2/futurevuls-mcp.git
 cd futurevuls-mcp
 ```
 
-### 🛠️ 2. 自動セットアップ（推奨）
+### 🛠️ 2. Automated Setup (Recommended)
 
 ```cmd
 setup_windows.bat
 ```
 
-このスクリプトが以下を自動実行します：
+This script automatically performs the following:
 
-- Node.js環境の確認
-- npm依存関係のインストール
-- 設定ファイルテンプレートの作成
-- Claude Desktop設定ファイルの作成
+- Node.js environment verification
+- npm dependency installation
+- Configuration file template creation
+- Claude Desktop configuration file creation
 
-### ⚙️ 3. 手動セットアップ
+### ⚙️ 3. Manual Setup
 
-#### Node.js依存関係のインストール
+#### Install Node.js Dependencies
 
 ```cmd
 npm install
 ```
 
-#### 設定ファイルの作成
+#### Create Configuration Files
 
 ```bash
 copy .env.sample .env
 copy groups.json.template groups.json
 
-# 他のMCP利用時は上書きに注意
+# Be careful not to overwrite when using other MCPs
 copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
-### 🔧 4. 設定ファイルの編集
+### 🔧 4. Edit Configuration Files
 
-#### .envファイルの設定
+#### Configure .env File
 
-メモ帳またはVS Codeで`.env`ファイルを開き、以下を設定：
+Open the `.env` file with Notepad or VS Code and configure the following:
 
 ```bash
-# FutureVuls API設定（必須）
+# FutureVuls API Configuration (Required)
 FUTUREVULS_API_TOKEN=your_actual_api_token_here
 
-# デバッグモード（オプション）
+# Debug Mode (Optional)
 FUTUREVULS_DEBUG=false
 ```
 
-#### groups.jsonファイルの設定
+#### Configure groups.json File
 
-メモ帳またはVS Codeで`groups.json`ファイルを開き、実際のグループ情報を以下の書式で設定：
+Open the `groups.json` file with Notepad or VS Code and set your actual group information in the following format:
 
 ```json
-グループ名: [
-  "グループトークン",
-  "グループID",
-  "脆弱性の数"
+Group Name: [
+  "Group Token",
+  "Group ID",
+  "Number of Vulnerabilities"
 ]
 ```
 
-**例：**
+**Example:**
 
 ```json
 {
     "group": [
         {
-            "本番環境": [
+            "Production Environment": [
                 "fvgs-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 123,
                 1500
             ]
         },
         {
-            "開発環境": [
+            "Development Environment": [
                 "fvgs-yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy", 
                 456,
                 800
@@ -123,35 +125,35 @@ FUTUREVULS_DEBUG=false
 }
 ```
 
-### 🤖 5. Claude Desktop設定
+### 🤖 5. Claude Desktop Configuration
 
-#### 設定ファイルの場所
+#### Configuration File Location
 
 ```bash
 %APPDATA%\Claude\claude_desktop_config.json
 ```
 
-**エクスプローラーでのアクセス方法:**
+**Access via File Explorer:**
 
-1. `Win + R` キーを押す
-2. `%APPDATA%\Claude` と入力してEnter
-3. `claude_desktop_config.json` を編集
+1. Press `Win + R` keys
+2. Type `%APPDATA%\Claude` and press Enter
+3. Edit `claude_desktop_config.json`
 
-#### 設定方法（テンプレート使用）
+#### Configuration Method (Using Template)
 
-**方法1: テンプレートをコピー（推奨）**
+**Method 1: Copy Template (Recommended)**
 
 ```bash
-# 他のMCP利用時は上書きに注意
+# Be careful not to overwrite when using other MCPs
 copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
-**方法2: 手動でファイル作成**
-メモ帳またはVS Codeで`%APPDATA%\Claude\claude_desktop_config.json`を作成
+**Method 2: Manual File Creation**
+Create `%APPDATA%\Claude\claude_desktop_config.json` using Notepad or VS Code
 
-#### 設定内容の編集
+#### Edit Configuration Content
 
-テンプレートまたは作成したファイルを以下のように編集：
+Edit the template or created file as follows:
 
 ```json
 {
@@ -167,49 +169,49 @@ copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config
 }
 ```
 
-**⚠️ パス指定の重要な注意点:**
+**⚠️ Important Notes for Path Specification:**
 
-- **絶対パス**を使用してください
-- バックスラッシュは`\\`でエスケープ（`\`ではなく`\\`）
-- 実際のインストールパスに置き換えてください
-- **ファイル名は `futurevuls-mcp.js`** です（Pythonではありません）
-- 日本語を含むパスは避けてください
+- Use **absolute paths**
+- Escape backslashes with `\\` (use `\\` instead of `\`)
+- Replace with your actual installation path
+- **File name is `futurevuls-mcp.js`** (not Python)
+- Avoid paths containing Japanese characters
 
-## 使用方法と動作確認
+## Usage and Operation Verification
 
-### 💡 MCPサーバーの動作について
+### 💡 About MCP Server Operation
 
-**Claude DesktopなどのAIアシスタントは、設定後に自動的にMCPサーバーと通信します。** 
-以下の手動起動方法は、主に**設定確認・トラブルシューティング・開発用**です。
+**AI assistants like Claude Desktop automatically communicate with the MCP server after configuration.** 
+The manual startup methods below are primarily for **configuration verification, troubleshooting, and development purposes**.
 
-### 🔍 1. 動作確認用 - バッチファイルで起動
+### 🔍 1. Verification - Start with Batch File
 
 ```cmd
 start_mcp.bat
 ```
 
-**用途**:
+**Use Cases**:
 
-- Claude Desktop設定前の動作確認
-- エラーメッセージの詳細確認
-- ログ出力の監視
+- Operation verification before Claude Desktop configuration
+- Detailed error message confirmation
+- Log output monitoring
 
-### 🔍 2. 動作確認用 - Node.js直接実行  
+### 🔍 2. Verification - Direct Node.js Execution
 
 ```cmd
 node futurevuls-mcp.js
 ```
 
-**用途**:
+**Use Cases**:
 
-- 詳細なデバッグ情報の確認
-- npm依存関係の問題特定
-- 開発・テスト時の動作確認
+- Detailed debug information confirmation
+- npm dependency issue identification
+- Development and testing operation verification
 
-### ✅ 正常動作の確認方法
+### ✅ How to Verify Normal Operation
 
-**1. 手動起動での確認**
-起動時に以下のようなメッセージが表示されれば正常：
+**1. Manual Startup Verification**
+If the following messages appear at startup, it's working normally:
 
 ```cmd
 FutureVuls MCP Server starting...
@@ -217,59 +219,59 @@ Listening on stdio...
 Server initialized successfully
 ```
 
-**2. Claude Desktopでの確認**
+**2. Claude Desktop Verification**
 
-- Claude Desktopを再起動
-- 「FutureVulsの脆弱性を確認して」などと入力
-- MCPツールが認識されて実行されれば成功
+- Restart Claude Desktop
+- Type something like "Check FutureVuls vulnerabilities"
+- If MCP tools are recognized and executed, it's successful
 
-## API機能一覧
+## API Function List
 
-| 機能 | 説明 | Claude での使用例 |
-|------|------|------------------|
-| `futurevuls_health_check` | APIヘルスチェック | "FutureVulsの接続状態を確認して" |
-| `futurevuls_list_groups` | グループ一覧取得 | "監視対象グループを教えて" |
-| `futurevuls_get_cves` | CVE一覧取得 | "最新の脆弱性リストを表示して" |
-| `futurevuls_get_cve_detail` | CVE詳細情報取得 | "CVE-2023-12345の詳細を教えて" |
-| `futurevuls_get_tasks` | タスク一覧取得 | "対応すべきタスクはある？" |
-| `futurevuls_get_task_detail` | タスク詳細情報取得 | "タスク123の詳細を確認して" |
-| `futurevuls_get_servers` | サーバー一覧取得 | "監視中のサーバー一覧を表示" |
-| `futurevuls_search_critical_cves` | 重要度高CVE検索 | "CRITICAL脆弱性を抽出して" |
-| `futurevuls_generate_weekly_report` | 週次レポート生成 | "今週の脆弱性レポートを作成" |
+| Function | Description | Claude Usage Example |
+|----------|-------------|---------------------|
+| `futurevuls_health_check` | API health check | "Check FutureVuls connection status" |
+| `futurevuls_list_groups` | Get group list | "Show me monitored groups" |
+| `futurevuls_get_cves` | Get CVE list | "Display latest vulnerability list" |
+| `futurevuls_get_cve_detail` | Get CVE details | "Tell me details of CVE-2023-12345" |
+| `futurevuls_get_tasks` | Get task list | "Are there any tasks to handle?" |
+| `futurevuls_get_task_detail` | Get task details | "Check details of task 123" |
+| `futurevuls_get_servers` | Get server list | "Show list of monitored servers" |
+| `futurevuls_search_critical_cves` | Search high-severity CVEs | "Extract CRITICAL vulnerabilities" |
+| `futurevuls_generate_weekly_report` | Generate weekly report | "Generate this week's vulnerability report" |
 
-## ファイル構成
+## File Structure
 
 ```text
 futurevuls-mcp/
-├── 📄 futurevuls-mcp.js           # メインMCPサーバー (Node.js)
-├── 📦 package.json                # Node.js依存関係とメタデータ
-├── 🚀 start_mcp.bat               # Windows起動スクリプト
-├── ⚙️ setup_windows.bat           # Windows用セットアップスクリプト  
-├── 🔧 .env.sample                 # 環境変数テンプレート
-├── 📊 groups.json.template        # グループ設定テンプレート
-├── 🤖 claude_desktop_config.json.template # Claude Desktop設定テンプレート
-├── 📖 README.md                   # このファイル
-├── 📜 LICENSE                     # ライセンス
-├── 📁 docs/                       # ドキュメント
-├── 🖼️ img/                        # トップ、ロゴ画像ファイル
-└── 📁 evac/                       # 開発・テスト・Python版ファイル
+├── 📄 futurevuls-mcp.js           # Main MCP Server (Node.js)
+├── 📦 package.json                # Node.js dependencies and metadata
+├── 🚀 start_mcp.bat               # Windows startup script
+├── ⚙️ setup_windows.bat           # Windows setup script
+├── 🔧 .env.sample                 # Environment variable template
+├── 📊 groups.json.template        # Group configuration template
+├── 🤖 claude_desktop_config.json.template # Claude Desktop configuration template
+├── 📖 README.md                   # This file
+├── 📜 LICENSE                     # License
+├── 📁 docs/                       # Documentation
+├── 🖼️ img/                        # Top and logo image files
+└── 📁 evac/                       # Development, test, and Python version files
 ```
 
-## セキュリティ注意事項
+## Security Considerations
 
-⚠️ **重要**: 以下のファイルには機密情報が含まれるため、第三者と共有しないでください：
+⚠️ **Important**: The following files contain sensitive information and should not be shared with third parties:
 
-- `.env` (環境変数・APIトークン)
-- `groups.json` (実際のグループ設定)
-- `claude_desktop_config.json` (実際のClaude Desktop設定)
+- `.env` (environment variables and API tokens)
+- `groups.json` (actual group configuration)
+- `claude_desktop_config.json` (actual Claude Desktop configuration)
 
 ---
 
 <div align="center">
 
-**🎯 このプロジェクトはWindows環境でのNode.js使用を前提として設計されています**
+**🎯 This project is designed for use with Node.js in Windows environments**
 
 </div>
 
 ---
-2025/07/29 keides2 Node.js版対応
+2025/07/29 keides2 Node.js version support
