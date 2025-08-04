@@ -1,7 +1,7 @@
 {
   "name": "futurevuls-mcp",
   "version": "1.0.0",
-  "description": "Model Context Protocol server for FutureVuls vulnerability management service integration (Office Environment with Proxy Support)",
+  "description": "Model Context Protocol server for FutureVuls vulnerability management service integration (Home Environment Direct Connection)",
   "main": "futurevuls-mcp.js",
   "scripts": {
     "start": "node futurevuls-mcp.js",
@@ -14,15 +14,14 @@
     "vulnerability",
     "security",
     "claude",
-    "proxy",
-    "office"
+    "home",
+    "direct-connection"
   ],
   "author": "keides2",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0",
-    "https-proxy-agent": "^7.0.6",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^3.3.2"
   },
   "engines": {
     "node": ">=18.0.0"

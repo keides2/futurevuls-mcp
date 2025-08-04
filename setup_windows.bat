@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 REM =============================================================================
 REM FutureVuls MCP Server Setup Script (Windows - Node.js)
 REM =============================================================================
@@ -13,8 +14,9 @@ REM Set current directory
 cd /d "%~dp0"
 
 REM Check Node.js installation
-echo [1/5] Checking Node.js environment...
-node --version >nul 2>&1
+echo 1/5 Checking Node.js environment...
+node --version
+echo %ERRORLEVEL%
 if %ERRORLEVEL% neq 0 (
     echo Error: Node.js is not installed.
     echo Please install Node.js 18.0 or higher and try again.
@@ -22,26 +24,28 @@ if %ERRORLEVEL% neq 0 (
     pause
     exit /b 1
 )
-node --version
+pause
 
 REM Check npm
-npm --version >nul 2>&1
+npm --version
+pause
+echo %ERRORLEVEL%
 if %ERRORLEVEL% neq 0 (
     echo Error: npm is not available.
     echo Please check Node.js installation.
     pause
     exit /b 1
 )
-npm --version
+pause
 
 REM Install Node.js dependencies
 echo.
-echo [2/5] Installing Node.js dependencies...
+echo 2/5 Installing Node.js dependencies...
 npm install
 
 REM Create configuration files
 echo.
-echo [3/5] Creating configuration files...
+echo 3/5 Creating configuration files...
 
 if not exist ".env" (
     copy .env.sample .env
@@ -61,7 +65,7 @@ if not exist "groups.json" (
 
 REM Create Claude Desktop config template copy
 echo.
-echo [4/5] Setting up Claude Desktop configuration...
+echo 4/5 Setting up Claude Desktop configuration...
 if not exist "%APPDATA%\Claude\claude_desktop_config.json" (
     if not exist "%APPDATA%\Claude" mkdir "%APPDATA%\Claude"
     copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
@@ -73,7 +77,7 @@ if not exist "%APPDATA%\Claude\claude_desktop_config.json" (
 
 REM Setup confirmation
 echo.
-echo [5/5] Setup completion check...
+echo 5/5 Setup completion check...
 echo.
 echo =========================================================
 echo Setup completed successfully!
