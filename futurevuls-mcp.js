@@ -20,7 +20,6 @@ const DEBUG = process.env.FUTUREVULS_DEBUG === 'true';
 // プロキシ設定
 const HTTPS_PROXY = process.env.HTTPS_PROXY || process.env.https_proxy;
 const HTTP_PROXY = process.env.HTTP_PROXY || process.env.http_proxy;
-
 // デバッグ用ログ関数
 function debugLog(message) {
   if (DEBUG) {
