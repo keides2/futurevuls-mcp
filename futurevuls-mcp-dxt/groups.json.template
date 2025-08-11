@@ -1,0 +1,18 @@
+{
+    "group": [
+        {
+            "GROUP_NAME_1": [
+                "GROUP_TOKEN_1",
+                GROUP_ID_1,
+                TOTAL_VULNERABILITIES_1
+            ]
+        },
+        {
+            "GROUP_NAME_2": [
+                "GROUP_TOKEN_2", 
+                GROUP_ID_2,
+                TOTAL_VULNERABILITIES_2
+            ]
+        }
+    ]
+}
