@@ -236,6 +236,10 @@ Server initialized successfully
 | `futurevuls_get_tasks` | Get task list | "Are there any tasks to handle?" |
 | `futurevuls_get_task_detail` | Get task details | "Check details of task 123" |
 | `futurevuls_get_servers` | Get server list | "Show list of monitored servers" |
+| `futurevuls_get_groupset_servers` | Get groupset servers | "Show servers in groupset" |
+| `futurevuls_get_group_members` | Get group members | "Show members of group 123" |
+| `futurevuls_get_org_groups` | Get organization groups | "List all organization groups" |
+| `futurevuls_get_org_members` | Get organization members | "Show organization members" |
 | `futurevuls_search_critical_cves` | Search high-severity CVEs | "Extract CRITICAL vulnerabilities" |
 | `futurevuls_generate_weekly_report` | Generate weekly report | "Generate this week's vulnerability report" |
 
@@ -243,7 +247,8 @@ Server initialized successfully
 
 ```text
 futurevuls-mcp/
-├── 📄 futurevuls-mcp.js           # Main MCP Server (Node.js)
+├── 📄 futurevuls-mcp.js           # Main MCP Server (Node.js) - For Claude Desktop
+├── 📄 futurevuls-mcp-legacy.js    # Legacy MCP Server (Node.js) - For VSCode + Cline
 ├── 📦 package.json                # Node.js dependencies and metadata
 ├── 🚀 start_mcp.bat               # Windows startup script
 ├── ⚙️ setup_windows.bat           # Windows setup script
@@ -256,6 +261,18 @@ futurevuls-mcp/
 ├── 🖼️ img/                        # Top and logo image files
 └── 📁 evac/                       # Development, test, and Python version files
 ```
+
+### 🔧 About Server Files
+
+**futurevuls-mcp.js** (Main)
+- For Claude Desktop use
+- Latest MCP protocol version (2025-06-18)
+- Recommended for general use
+
+**futurevuls-mcp-legacy.js** (Legacy)  
+- For VSCode + Cline use
+- Legacy MCP protocol version (2024-11-05)
+- Use when the main version is incompatible
 
 ## Security Considerations
 
