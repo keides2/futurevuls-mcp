@@ -1,11 +1,11 @@
 {
   "dxt_version": "0.1",
   "name": "futurevuls-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Model Context Protocol server for FutureVuls vulnerability management service integration",
   "author": {
     "name": "keides2",
-    "email": "keides2@example.com"
+    "email": "keides2@gmail.com"
   },
   "server": {
     "type": "node",
@@ -17,6 +17,7 @@
       ],
       "env": {
         "FUTUREVULS_API_TOKEN": "${FUTUREVULS_API_TOKEN}",
+        "FUTUREVULS_ORG_TOKEN": "${FUTUREVULS_ORG_TOKEN}",
         "FUTUREVULS_BASE_URL": "${FUTUREVULS_BASE_URL}",
         "FUTUREVULS_DEBUG": "${FUTUREVULS_DEBUG}",
         "HTTP_PROXY": "${HTTP_PROXY}",
