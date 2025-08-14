@@ -1,3 +1,5 @@
+[![MSeeP.ai Security Assessment Badge](https://mseep.net/pr/keides2-futurevuls-mcp-badge.png)](https://mseep.ai/app/keides2-futurevuls-mcp)
+
 # FutureVuls MCP Server (Windows Edition - Node.js)
 
 ![FutureVuls MCP](./img/top.png)
