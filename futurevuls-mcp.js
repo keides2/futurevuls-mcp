@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const { HttpsProxyAgent } = require('https-proxy-agent');
 const fetch = require('node-fetch');
+process.stdin.setEncoding('utf8');
 
 // 環境変数の設定
 const API_TOKEN = process.env.FUTUREVULS_API_TOKEN;
@@ -999,9 +1000,12 @@ async function main() {
   }
 
   // 標準入力からJSON-RPCメッセージを読み取り
+  // MCPのSTDIO仕様では「stdoutはJSON-RPC専用・ログはstderr」で、メッセージは改行区切り
+  // readlineにoutput: stdoutを与えると、terminal:falseでも実装や将来の変更次第で
+  // プロンプト/制御文字/書き戻しなどがstdoutに混入する余地が残るためこれを削除した
   const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout,
+    crlfDelay: Infinity,
     terminal: false
   });
 

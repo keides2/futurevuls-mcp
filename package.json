@@ -1,6 +1,6 @@
 {
     "name":  "@keides2/futurevuls-mcp",
-    "version":  "1.0.1",
+    "version":  "1.0.3",
     "description":  "Model Context Protocol server for FutureVuls vulnerability management service integration (Office Environment with Proxy Support)",
     "main":  "futurevuls-mcp.js",
     "scripts":  {
