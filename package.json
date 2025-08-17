@@ -38,7 +38,16 @@
                  "url":  "https://github.com/keides2/futurevuls-mcp/issues"
              },
     "homepage":  "https://github.com/keides2/futurevuls-mcp#readme",
-    "publishConfig":  {
-                          "registry":  "https://npm.pkg.github.com/"
-                      }
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "futurevuls-mcp.js",
+        "futurevuls-mcp-legacy.js",
+        "LICENSE",
+        "README.md",
+        "README_ja.md",
+        "claude_desktop_config.json.template",
+        "groups.json.template"
+    ]
 }
