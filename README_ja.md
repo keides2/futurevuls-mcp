@@ -35,6 +35,26 @@
 
 ## セットアップ
 
+> 注: DXT パッケージは現時点では非対応です。シンプルで信頼性の高い npm（グローバルコマンド）方式を推奨します。
+
+### 🚀 かんたん導入（推奨）
+
+```cmd
+npm install -g @keides2/futurevuls-mcp
+```
+
+ローカルの tgz（オフライン/社内配布）の場合：
+
+```cmd
+npm install -g .\keides2-futurevuls-mcp-2.1.0.tgz
+```
+
+その後、以下でサーバーを実行できます：
+
+```cmd
+futurevuls-mcp
+```
+
 ### 📦 1. リポジトリのクローン
 
 ```cmd
@@ -153,7 +173,23 @@ copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config
 
 #### 設定内容の編集
 
-テンプレートまたは作成したファイルを以下のように編集：
+推奨（npm グローバルコマンド利用）：
+
+```json
+{
+  "mcpServers": {
+    "futurevuls": {
+      "command": "futurevuls-mcp",
+      "args": [],
+      "env": {
+        "FUTUREVULS_API_TOKEN": "your_actual_api_token_here"
+      }
+    }
+  }
+}
+```
+
+代替（グローバル導入せず、Node で直指定する場合）：
 
 ```json
 {
@@ -196,7 +232,13 @@ start_mcp.bat
 - エラーメッセージの詳細確認
 - ログ出力の監視
 
-### 🔍 2. 動作確認用 - Node.js直接実行  
+### 🔍 2. 動作確認用 - npm グローバルコマンドで起動
+
+```cmd
+futurevuls-mcp
+```
+
+### 🔍 3. 動作確認用 - Node.js直接実行  
 
 ```cmd
 node futurevuls-mcp.js
@@ -224,6 +266,37 @@ Server initialized successfully
 - Claude Desktopを再起動
 - 「FutureVulsの脆弱性を確認して」などと入力
 - MCPツールが認識されて実行されれば成功
+
+## DXT 配布について（現時点では非対応の理由）
+
+現状、DXT 形式での配布・起動は安定性の観点からサポート対象外としています。回避策としては、本文で案内している npm グローバルコマンド（futurevuls-mcp）方式、または Node 直接実行をご利用ください。
+
+### 症状
+
+- Claude Desktop の UtilityProcess 環境で、初期化後に以下が断続的に発生:
+  - -32001 Request timed out
+  - Unexpected server transport closed
+- 同一マシンで Node 直接実行や Content-Length を用いたスモークテストは成功（再現せず）
+
+### 実施した対処
+
+- JSON-RPC の stdin パーサを刷新し、以下に対応:
+  - Content-Length フレーミング（LSP準拠）と JSON Lines の両対応
+  - ヘッダー終端（CRLFCRLF/LFLF）を柔軟に判定
+  - 応答も入力方式に合わせたフレーミングで返却
+- initialize 応答の簡素化・メタ情報調整、バージョン更新と再パッケージを複数回実施
+- DXT パッケージの再インストール、保存先変更（別ドライブ/ASCIIパス）、拡張の再有効化などを検証
+- いずれも一部環境でのみタイムアウト/切断が継続
+
+### 現時点の評価
+
+一部環境における UtilityProcess の stdio/ライフサイクル依存の挙動差が疑われ、DXT での安定性を保証できない状況です。これに対し、npm グローバルコマンド方式は安定しており、運用・配布の簡易性も高いことから、公式の推奨手段としています。
+
+### 方針
+
+- 正式サポート: npm グローバルコマンド（futurevuls-mcp）方式
+- 代替手段: Node 直接実行（開発・検証用途）
+- DXT: 今後の改善状況を確認しつつ再検証（進展があれば README/リリースノートで告知）
 
 ## API機能一覧
 
@@ -265,11 +338,13 @@ futurevuls-mcp/
 ### 🔧 サーバーファイルについて
 
 **futurevuls-mcp.js** (メイン)
+
 - Claude Desktop用
 - 最新MCPプロトコルバージョン (2025-06-18)
 - 一般的な使用に推奨
 
 **futurevuls-mcp-legacy.js** (レガシー)  
+
 - VSCode + Cline用
 - レガシーMCPプロトコルバージョン (2024-11-05)
 - メイン版が互換性がない場合に使用
@@ -284,11 +359,9 @@ futurevuls-mcp/
 
 ---
 
-<div align="center">
+## 注意
 
-**🎯 このプロジェクトはWindows環境でのNode.js使用を前提として設計されています**
-
-</div>
+このプロジェクトは Windows 環境での Node.js 使用を前提として設計されています。
 
 ---
 2025/07/29 keides2 Node.js版対応

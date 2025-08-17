@@ -35,6 +35,26 @@ This project is a Windows-based server that provides access to the <img src=./im
 
 ## Setup
 
+> Note: DXT packaging is not currently supported. We recommend installing and running via npm (global command) for simplicity and reliability.
+
+### 🚀 Quick install (Recommended)
+
+```cmd
+npm install -g @keides2/futurevuls-mcp
+```
+
+Or if you have a local tarball (offline/distribution):
+
+```cmd
+npm install -g .\keides2-futurevuls-mcp-2.1.0.tgz
+```
+
+Then you can run the server as a CLI:
+
+```cmd
+futurevuls-mcp
+```
+
 ### 📦 1. Clone the Repository
 
 ```cmd
@@ -153,7 +173,23 @@ Create `%APPDATA%\Claude\claude_desktop_config.json` using Notepad or VS Code
 
 #### Edit Configuration Content
 
-Edit the template or created file as follows:
+Preferred (npm global command):
+
+```json
+{
+  "mcpServers": {
+    "futurevuls": {
+      "command": "futurevuls-mcp",
+      "args": [],
+      "env": {
+        "FUTUREVULS_API_TOKEN": "your_actual_api_token_here"
+      }
+    }
+  }
+}
+```
+
+Alternative (direct Node path, if not using global install):
 
 ```json
 {
@@ -196,7 +232,13 @@ start_mcp.bat
 - Detailed error message confirmation
 - Log output monitoring
 
-### 🔍 2. Verification - Direct Node.js Execution
+### 🔍 2. Verification - Run via npm global command
+
+```cmd
+futurevuls-mcp
+```
+
+### 🔍 3. Verification - Direct Node.js Execution
 
 ```cmd
 node futurevuls-mcp.js
@@ -224,6 +266,37 @@ Server initialized successfully
 - Restart Claude Desktop
 - Type something like "Check FutureVuls vulnerabilities"
 - If MCP tools are recognized and executed, it's successful
+
+## DXT Distribution (currently unsupported) — reasons
+
+At present, distributing/running this server in DXT format is not officially supported due to stability concerns. As a workaround, please use the npm global command (futurevuls-mcp) or run directly with Node.js as described above.
+
+### Symptoms
+
+- In Claude Desktop's UtilityProcess environment, after initialization the following intermittently occur:
+  - -32001 Request timed out
+  - Unexpected server transport closed
+- On the same machine, direct Node execution and Content-Length smoke tests succeed (not reproducible)
+
+### Actions Taken
+
+- Rewrote the JSON-RPC stdin parser to support:
+  - Content-Length framing (LSP-style) and JSON Lines
+  - Flexible header termination detection (CRLFCRLF/LFLF)
+  - Response framing that matches the input style
+- Simplified initialize response and metadata, bumped versions, and repackaged multiple times
+- Reinstalled DXT package, changed install locations (different drive/ASCII-only paths), re-enabled extensions, etc.
+- Timeouts/closures still persisted only on some environments
+
+### Current Assessment
+
+We suspect environment-specific behavior related to UtilityProcess stdio/lifecycle in certain setups, which prevents us from guaranteeing stability via DXT. In contrast, the npm global command approach has been stable and is operationally simple, so we recommend it as the official method.
+
+### Policy
+
+- Officially supported: npm global command (futurevuls-mcp)
+- Alternative: direct Node execution (for development/verification)
+- DXT: will be revisited as upstream behavior improves; any progress will be announced in README/release notes
 
 ## API Function List
 
@@ -265,11 +338,13 @@ futurevuls-mcp/
 ### 🔧 About Server Files
 
 **futurevuls-mcp.js** (Main)
+
 - For Claude Desktop use
 - Latest MCP protocol version (2025-06-18)
 - Recommended for general use
 
 **futurevuls-mcp-legacy.js** (Legacy)  
+
 - For VSCode + Cline use
 - Legacy MCP protocol version (2024-11-05)
 - Use when the main version is incompatible
@@ -284,11 +359,9 @@ futurevuls-mcp/
 
 ---
 
-<div align="center">
+## Note
 
-**🎯 This project is designed for use with Node.js in Windows environments**
-
-</div>
+This project is designed for use with Node.js on Windows environments.
 
 ---
 2025/07/29 keides2 Node.js version support

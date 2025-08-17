@@ -453,7 +453,7 @@ function sendResponse(id, result = null, error = null) {
     response.result = result;
   }
 
-  console.log(JSON.stringify(response));
+  process.stdout.write(JSON.stringify(response) + '\n');
 }
 
 // JSON-RPC エラー応答
