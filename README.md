@@ -65,7 +65,7 @@ cd futurevuls-mcp
 ### 🛠️ 2. Automated Setup (Recommended)
 
 ```cmd
-setup_windows.bat
+scripts\setup_windows.bat
 ```
 
 This script automatically performs the following:
@@ -87,10 +87,10 @@ npm install
 
 ```bash
 copy .env.sample .env
-copy groups.json.template groups.json
+copy templates\groups.json.template groups.json
 
 # Be careful not to overwrite when using other MCPs
-copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
+copy templates\claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
 ### 🔧 4. Edit Configuration Files
@@ -173,7 +173,7 @@ Group Name: [
 
 ```bash
 # Be careful not to overwrite when using other MCPs
-copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
+copy templates\claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
 **Method 2: Manual File Creation**
@@ -328,19 +328,30 @@ We suspect environment-specific behavior related to UtilityProcess stdio/lifecyc
 
 ```text
 futurevuls-mcp/
-├── 📄 futurevuls-mcp.js           # Main MCP Server (Node.js) - For Claude Desktop
-├── 📄 futurevuls-mcp-legacy.js    # Legacy MCP Server (Node.js) - For VSCode + Cline
+├── 📄 futurevuls-mcp.js           # Main MCP Server script
 ├── 📦 package.json                # Node.js dependencies and metadata
-├── 🚀 start_mcp.bat               # Windows startup script
-├── ⚙️ setup_windows.bat           # Windows setup script
 ├── 🔧 .env.sample                 # Environment variable template
-├── 📊 groups.json.template        # Group configuration template
-├── 🤖 claude_desktop_config.json.template # Claude Desktop configuration template
-├── 📖 README.md                   # This file
-├── 📜 LICENSE                     # License
-├── 📁 docs/                       # Documentation
-├── 🖼️ img/                        # Top and logo image files
-└── 📁 evac/                       # Development, test, and Python version files
+├── 📖 README.md                   # This file (English)
+├── 📖 README_ja.md                # Japanese README
+├── 📜 LICENSE                     # MIT License
+├── 📁 docs/                       # Documentation directory
+│   ├── 📁 setup/                  # Setup guides
+│   ├── 📁 guides/                 # User guides
+│   ├── 📁 releases/               # Release notes
+│   └── 📄 api_sample.txt          # API usage examples
+├── 📁 scripts/                    # Setup and test scripts
+│   ├── ⚙️ setup_windows.bat       # Windows automated setup
+│   └── 🧪 test-health.js          # Health check script
+├── 📁 templates/                  # Configuration templates
+│   ├── 📊 groups.json.template    # Group configuration template
+│   └── 🤖 claude_desktop_config.json.template # Claude Desktop config template
+├── 📁 archive/                    # Legacy files and old versions
+│   ├── 📄 futurevuls-mcp-legacy.js # Legacy MCP Server (for VSCode + Cline)
+│   ├── 📦 package.*.json          # Old package configurations
+│   └── 📦 *.tgz                   # Previous release packages
+├── 🖼️ img/                        # Images for documentation
+├── 📁 dxt-init/                   # DXT packaging experiments (deprecated)
+└── 📁 evac/                       # Development and backup files
 ```
 
 ### 🔧 About Server Files
@@ -348,10 +359,11 @@ futurevuls-mcp/
 **futurevuls-mcp.js** (Main)
 
 - For Claude Desktop use
-- Latest MCP protocol version (2025-06-18)
+- Latest MCP protocol version (2024-11-05)
 - Recommended for general use
+- Supports flexible groups.json placement
 
-**futurevuls-mcp-legacy.js** (Legacy)  
+**archive/futurevuls-mcp-legacy.js** (Legacy)  
 
 - For VSCode + Cline use
 - Legacy MCP protocol version (2024-11-05)

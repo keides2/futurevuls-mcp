@@ -1,0 +1,29 @@
+## File Structure
+
+```text
+futurevuls-mcp/
+├── 📄 futurevuls-mcp.js           # Main MCP Server script
+├── 📦 package.json                # Node.js dependencies and metadata
+├── 🔧 .env.sample                 # Environment variable template
+├── 📖 README.md                   # This file (English)
+├── 📖 README_ja.md                # Japanese README
+├── 📜 LICENSE                     # MIT License
+├── 📁 docs/                       # Documentation directory
+│   ├── 📁 setup/                  # Setup guides
+│   ├── 📁 guides/                 # User guides
+│   ├── 📁 releases/               # Release notes
+│   └── 📄 api_sample.txt          # API usage examples
+├── 📁 scripts/                    # Setup and test scripts
+│   ├── ⚙️ setup_windows.bat       # Windows automated setup
+│   └── 🧪 test-health.js          # Health check script
+├── 📁 templates/                  # Configuration templates
+│   ├── 📊 groups.json.template    # Group configuration template
+│   └── 🤖 claude_desktop_config.json.template # Claude Desktop config template
+├── 📁 archive/                    # Legacy files and old versions
+│   ├── 📄 futurevuls-mcp-legacy.js # Legacy MCP Server (for VSCode + Cline)
+│   ├── 📦 package.*.json          # Old package configurations
+│   └── 📦 *.tgz                   # Previous release packages
+├── 🖼️ img/                        # Images for documentation
+├── 📁 dxt-init/                   # DXT packaging experiments (deprecated)
+└── 📁 evac/                       # Development and backup files
+```

@@ -21,7 +21,10 @@ sdist/
 var/
 wheels/
 *.tgz
-sh# Configuration backups
+# Archive folder tgz files
+archive/*.tgz
+
+# Configuration backups
 claude_desktop_config.*.json
 .env
 .env.*
@@ -31,7 +34,10 @@ claude_desktop_config.*.json
 dxt-build/
 *.dxt
 claude_desktop_config.json.lnk
-cline_mcp_settings.jsonwheels/
+cline_mcp_settings.json
+*.html
+*_tmp.html
+*_tmp.*wheels/
 *.egg-info/
 .installed.cfg
 *.egg

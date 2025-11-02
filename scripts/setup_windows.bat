@@ -9,8 +9,9 @@ echo FutureVuls MCP Server (Node.js) setup starting...
 echo =========================================================
 echo.
 
-REM Set current directory
-cd /d "%~dp0"
+REM Set current directory to parent (project root)
+cd /d "%~dp0\.."
+echo Working directory: %CD%
 
 REM Check Node.js installation
 echo [1/5] Checking Node.js environment...
@@ -78,7 +79,7 @@ if not exist ".env" (
 )
 
 if not exist "groups.json" (
-    copy groups.json.template groups.json
+    copy templates\groups.json.template groups.json
     echo groups.json file created.
     echo IMPORTANT: Edit groups.json file to set actual group information.
 ) else (
@@ -90,7 +91,7 @@ echo.
 echo [4/5] Setting up Claude Desktop configuration...
 if not exist "%APPDATA%\Claude\claude_desktop_config.json" (
     if not exist "%APPDATA%\Claude" mkdir "%APPDATA%\Claude"
-    copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
+    copy templates\claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
     echo Claude Desktop config file created.
     echo IMPORTANT: Edit %APPDATA%\Claude\claude_desktop_config.json to set FUTUREVULS_API_TOKEN.
 ) else (

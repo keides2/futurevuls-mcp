@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../chrome_extension"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "futurevuls-mcp"
+	}
+}

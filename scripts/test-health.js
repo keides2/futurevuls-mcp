@@ -14,8 +14,8 @@ process.env.FUTUREVULS_DEBUG = 'true';
 
 console.log('=== FutureVuls MCP Server Health Check ===\n');
 
-// スクリプトのパスを直接指定
-const mcpScriptPath = path.join(__dirname, 'futurevuls-mcp.js');
+// スクリプトのパスを直接指定（親ディレクトリのfuturevuls-mcp.js）
+const mcpScriptPath = path.join(__dirname, '..', 'futurevuls-mcp.js');
 console.log(`スクリプトパス: ${mcpScriptPath}\n`);
 
 const mcp = spawn('node', [mcpScriptPath], {

@@ -65,7 +65,7 @@ cd futurevuls-mcp
 ### 🛠️ 2. 自動セットアップ（推奨）
 
 ```cmd
-setup_windows.bat
+scripts\setup_windows.bat
 ```
 
 このスクリプトが以下を自動実行します：
@@ -87,10 +87,10 @@ npm install
 
 ```bash
 copy .env.sample .env
-copy groups.json.template groups.json
+copy templates\groups.json.template groups.json
 
 # 他のMCP利用時は上書きに注意
-copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
+copy templates\claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
 ### 🔧 4. 設定ファイルの編集
@@ -173,7 +173,7 @@ FUTUREVULS_DEBUG=false
 
 ```bash
 # 他のMCP利用時は上書きに注意
-copy claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
+copy templates\claude_desktop_config.json.template "%APPDATA%\Claude\claude_desktop_config.json"
 ```
 
 **方法2: 手動でファイル作成**
@@ -328,19 +328,68 @@ Server initialized successfully
 
 ```text
 futurevuls-mcp/
-├── 📄 futurevuls-mcp.js           # メインMCPサーバー (Node.js) - Claude Desktop用
-├── 📄 futurevuls-mcp-legacy.js    # レガシーMCPサーバー (Node.js) - VSCode + Cline用
+├── 📄 futurevuls-mcp.js           # メインMCPサーバースクリプト
 ├── 📦 package.json                # Node.js依存関係とメタデータ
-├── 🚀 start_mcp.bat               # Windows起動スクリプト
-├── ⚙️ setup_windows.bat           # Windows用セットアップスクリプト  
 ├── 🔧 .env.sample                 # 環境変数テンプレート
-├── 📊 groups.json.template        # グループ設定テンプレート
-├── 🤖 claude_desktop_config.json.template # Claude Desktop設定テンプレート
-├── 📖 README.md                   # このファイル
-├── 📜 LICENSE                     # ライセンス
-├── 📁 docs/                       # ドキュメント
-├── 🖼️ img/                        # トップ、ロゴ画像ファイル
-└── 📁 evac/                       # 開発・テスト・Python版ファイル
+├── 📖 README.md                   # 英語版README
+├── 📖 README_ja.md                # このファイル（日本語版）
+├── 📜 LICENSE                     # MITライセンス
+├── 📁 docs/                       # ドキュメントディレクトリ
+│   ├── 📁 setup/                  # セットアップガイド
+│   ├── 📁 guides/                 # ユーザーガイド
+│   ├── 📁 releases/               # リリースノート
+│   └── 📄 api_sample.txt          # API使用例
+├── 📁 scripts/                    # セットアップ・テストスクリプト
+│   ├── ⚙️ setup_windows.bat       # Windows自動セットアップ
+│   └── 🧪 test-health.js          # ヘルスチェックスクリプト
+├── 📁 templates/                  # 設定ファイルテンプレート
+│   ├── 📊 groups.json.template    # グループ設定テンプレート
+│   └── 🤖 claude_desktop_config.json.template # Claude Desktop設定テンプレート
+├── 📁 archive/                    # レガシーファイル・旧バージョン
+│   ├── 📄 futurevuls-mcp-legacy.js # レガシーMCPサーバー（VSCode + Cline用）
+│   ├── 📦 package.*.json          # 旧パッケージ設定
+│   └── 📦 *.tgz                   # 過去リリースパッケージ
+├── 🖼️ img/                        # ドキュメント用画像
+├── 📁 dxt-init/                   # DXTパッケージング実験（非推奨）
+└── 📁 evac/                       # 開発・バックアップファイル
+```
+
+### 🔧 サーバーファイルについて
+
+**futurevuls-mcp.js** (メイン)
+
+- Claude Desktop用
+- 最新MCPプロトコルバージョン (2024-11-05)
+- 通常利用を推奨
+- 柔軟なgroups.json配置をサポート
+
+**archive/futurevuls-mcp-legacy.js** (レガシー)
+
+## ファイル構成
+
+```text
+```
+futurevuls-mcp/
+├── 📄 futurevuls-mcp.js           # メインMCPサーバースクリプト
+├── 📦 package.json                # Node.js依存関係とメタデータ
+├── 🔧 .env.sample                 # 環境変数テンプレート
+├── 📖 README.md                   # 英語版README
+├── 📖 README_ja.md                # このファイル（日本語版）
+├── 📜 LICENSE                     # MITライセンス
+├── 📁 docs/                       # ドキュメントディレクトリ
+│   ├── � setup/                  # セットアップガイド
+│   ├── 📁 guides/                 # ユーザーガイド
+│   ├── 📁 releases/               # リリースノート
+│   └── 📄 api_sample.txt          # API使用例
+├── 📁 scripts/                    # セットアップ・テストスクリプト
+│   ├── ⚙️ setup_windows.bat       # Windows自動セットアップ
+│   └── 🧪 test-health.js          # ヘルスチェックスクリプト
+├── 📁 templates/                  # 設定ファイルテンプレート
+│   ├── 📊 groups.json.template    # グループ設定テンプレート
+│   └── 🤖 claude_desktop_config.json.template # Claude Desktop設定テンプレート
+├── 📁 archive/                    # レガシーファイル・旧バージョン
+├── 🖼️ img/                        # ドキュメント用画像
+└── 📁 evac/                       # 開発・バックアップファイル
 ```
 
 ### 🔧 サーバーファイルについて
