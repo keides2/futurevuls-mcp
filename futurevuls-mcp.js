@@ -39,6 +39,9 @@ function loadGroupsConfig() {
       path.join(process.env.HOME || process.env.USERPROFILE, 'groups.json')  // 3. ホームディレクトリ
     ];
     
+    debugLog(`Searching for groups.json in the following locations:`);
+    searchPaths.forEach((p, i) => debugLog(`  ${i+1}. ${p} (exists: ${fs.existsSync(p)})`));
+    
     let configPath = null;
     for (const searchPath of searchPaths) {
       if (fs.existsSync(searchPath)) {
@@ -54,7 +57,7 @@ function loadGroupsConfig() {
       return null;
     }
     
-    debugLog(`Loading groups config from: ${configPath}`);
+    console.error(`[INFO] Loading groups config from: ${configPath}`);
     const configData = fs.readFileSync(configPath, 'utf8');
     const config = JSON.parse(configData);
     debugLog(`Successfully loaded ${config.group?.length || 0} groups`);
@@ -1002,16 +1005,10 @@ async function handleRequest(request) {
 async function main() {
   debugLog('Starting Enhanced FutureVuls MCP Server with groups.json support...');
 
-  // groups.jsonの存在確認
-  const configPath = path.join(__dirname, 'groups.json');
-  if (fs.existsSync(configPath)) {
-    debugLog(`Found groups.json at: ${configPath}`);
-    const config = loadGroupsConfig();
-    if (config && config.group) {
-      debugLog(`Loaded ${config.group.length} groups from groups.json`);
-    }
-  } else {
-    console.error('[WARNING] groups.json not found, using fallback tokens');
+  // groups.jsonの存在確認（loadGroupsConfig内で複数パスをチェック）
+  const config = loadGroupsConfig();
+  if (config && config.group) {
+    debugLog(`Loaded ${config.group.length} groups from groups.json`);
   }
 
   // 標準入力からJSON-RPCメッセージを読み取り
