@@ -32,14 +32,29 @@ function debugLog(message) {
 // groups.json読み込み関数
 function loadGroupsConfig() {
   try {
-    const configPath = path.join(__dirname, 'groups.json');
-    debugLog(`Loading groups config from: ${configPath}`);
+    // 複数の場所からgroups.jsonを探す (優先順位順)
+    const searchPaths = [
+      path.join(process.cwd(), 'groups.json'),              // 1. カレントディレクトリ
+      path.join(__dirname, 'groups.json'),                  // 2. スクリプトのディレクトリ
+      path.join(process.env.HOME || process.env.USERPROFILE, 'groups.json')  // 3. ホームディレクトリ
+    ];
     
-    if (!fs.existsSync(configPath)) {
-      console.error('[WARNING] groups.json not found, using fallback token');
+    let configPath = null;
+    for (const searchPath of searchPaths) {
+      if (fs.existsSync(searchPath)) {
+        configPath = searchPath;
+        break;
+      }
+    }
+    
+    if (!configPath) {
+      console.error('[WARNING] groups.json not found in any of the following locations:');
+      searchPaths.forEach(p => console.error(`  - ${p}`));
+      console.error('[WARNING] Using fallback token');
       return null;
     }
     
+    debugLog(`Loading groups config from: ${configPath}`);
     const configData = fs.readFileSync(configPath, 'utf8');
     const config = JSON.parse(configData);
     debugLog(`Successfully loaded ${config.group?.length || 0} groups`);

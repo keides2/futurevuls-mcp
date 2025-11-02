@@ -109,7 +109,13 @@ FUTUREVULS_DEBUG=false
 
 #### groups.jsonファイルの設定
 
-メモ帳またはVS Codeで`groups.json`ファイルを開き、実際のグループ情報を以下の書式で設定：
+`groups.json`ファイルは以下のいずれかの場所に配置できます（**優先順位順**）：
+
+1. **カレントディレクトリ** - コマンド実行時のディレクトリ（最も便利）
+2. **スクリプトのディレクトリ** - `futurevuls-mcp.js`が配置されているディレクトリ
+3. **ホームディレクトリ** - `C:\Users\[USERNAME]\groups.json`
+
+メモ帳またはVS Codeで`groups.json`ファイルを作成・編集し、実際のグループ情報を以下の書式で設定：
 
 ```json
 グループ名: [
@@ -144,6 +150,8 @@ FUTUREVULS_DEBUG=false
     ]
 }
 ```
+
+> **💡 ヒント**: npmグローバルインストールの場合、Claude Desktopの作業ディレクトリ（通常は`C:\Users\[USERNAME]`）に`groups.json`を配置するのが最も簡単です。
 
 ### 🤖 5. Claude Desktop設定
 
