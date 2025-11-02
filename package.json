@@ -1,43 +1,43 @@
 {
-    "name":  "@keides2/futurevuls-mcp",
-    "version":  "2.2.0",
-    "description":  "Model Context Protocol server for FutureVuls vulnerability management service integration (Office Environment with Proxy Support)",
-    "main":  "futurevuls-mcp.js",
+    "name": "@keides2/futurevuls-mcp",
+    "version": "2.2.1",
+    "description": "Model Context Protocol server for FutureVuls vulnerability management service integration (Office Environment with Proxy Support)",
+    "main": "futurevuls-mcp.js",
     "bin": {
         "futurevuls-mcp": "./futurevuls-mcp.js"
     },
-    "scripts":  {
-                    "start":  "node futurevuls-mcp.js",
-                    "test":  "node --test"
-                },
-    "keywords":  [
-                     "mcp",
-                     "model-context-protocol",
-                     "futurevuls",
-                     "vulnerability",
-                     "security",
-                     "claude",
-                     "proxy",
-                     "office"
-                 ],
-    "author":  "keides2",
-    "license":  "MIT",
-    "dependencies":  {
-                         "@modelcontextprotocol/sdk":  "^0.5.0",
-                         "https-proxy-agent":  "^7.0.6",
-                         "node-fetch":  "^2.7.0"
-                     },
-    "engines":  {
-                    "node":  "\u003e=18.0.0"
-                },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/keides2/futurevuls-mcp.git"
-                   },
-    "bugs":  {
-                 "url":  "https://github.com/keides2/futurevuls-mcp/issues"
-             },
-    "homepage":  "https://github.com/keides2/futurevuls-mcp#readme",
+    "scripts": {
+        "start": "node futurevuls-mcp.js",
+        "test": "node --test"
+    },
+    "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "futurevuls",
+        "vulnerability",
+        "security",
+        "claude",
+        "proxy",
+        "office"
+    ],
+    "author": "keides2",
+    "license": "MIT",
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^0.5.0",
+        "https-proxy-agent": "^7.0.6",
+        "node-fetch": "^2.7.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/keides2/futurevuls-mcp.git"
+    },
+    "bugs": {
+        "url": "https://github.com/keides2/futurevuls-mcp/issues"
+    },
+    "homepage": "https://github.com/keides2/futurevuls-mcp#readme",
     "publishConfig": {
         "access": "public"
     },
