@@ -1,0 +1,30 @@
+{
+  "name": "futurevuls-local-notifier",
+  "version": "1.0.0",
+  "description": "FutureVuls local notification system (no cloud services required)",
+  "main": "local-notifier.js",
+  "scripts": {
+    "start": "node local-notifier.js",
+    "schedule": "node scheduler-local.js",
+    "report": "node generate-report.js"
+  },
+  "keywords": [
+    "futurevuls",
+    "vulnerability",
+    "notification",
+    "local"
+  ],
+  "author": "keides2",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "https-proxy-agent": "^7.0.6",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3",
+    "node-notifier": "^10.0.1",
+    "open": "^8.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

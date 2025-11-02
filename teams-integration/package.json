@@ -1,0 +1,32 @@
+{
+  "name": "futurevuls-teams-integration",
+  "version": "1.0.0",
+  "description": "FutureVuls vulnerability notifications for Microsoft Teams via Power Automate",
+  "main": "teams-notifier.js",
+  "scripts": {
+    "start": "node teams-notifier.js",
+    "schedule": "node scheduler.js",
+    "test": "node test-notification.js"
+  },
+  "keywords": [
+    "teams",
+    "futurevuls",
+    "vulnerability",
+    "security",
+    "power-automate",
+    "notifications"
+  ],
+  "author": "keides2",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "https-proxy-agent": "^7.0.6",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0",
+    "node-notifier": "^10.0.1",
+    "open": "^10.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
